@@ -2,9 +2,9 @@
 
 // TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 int main() {
-    
+
     auto lang = "C++";
-    std::cout << "Me encantas preciosa, eres la mujer mas preciosa que existe " << lang << "!\n";
+    std::cout << "De verdad eres la mujer mas preciosa del mundo" << lang << "!\n";
 
 
 
