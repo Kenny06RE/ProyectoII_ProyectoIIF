@@ -20,6 +20,4 @@ public:
     string getTipo() const override { return "MP4"; }
 };
 
-
-
 #endif //PROYECTOII_VIDEOMP4_H

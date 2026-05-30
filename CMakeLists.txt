@@ -10,4 +10,6 @@ add_executable(ProyectoII main.cpp
         Videomp4.cpp
         Videomp4.h
         VideoMPG.cpp
-        VideoMPG.h)
+        VideoMPG.h
+        Adaptor/AdapterMPG.cpp
+        Adaptor/AdapterMPG.h)

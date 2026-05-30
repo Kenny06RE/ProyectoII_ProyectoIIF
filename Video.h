@@ -5,12 +5,12 @@
 #include "Librerias.h"
 
 /**
- * Clase abstracta que representa un video en el sistema "Tu Tubo".
- *
- * Principios aplicados:
- *  - OCP (SOLID): abierta a extensión (nuevos formatos), cerrada a modificación.
- *  - Parnas: los detalles de reproducción están encapsulados en cada subclase.
- *  - Demeter: la clase no accede a estructuras internas de otras clases.
+  Clase abstracta, representa un video.
+
+  Principios aplicados:
+   - OCP (SOLID): abierta a extensión (nuevos formatos), cerrada a modificación.
+   - Parnas: los detalles de reproducción están encapsulados en cada subclase.
+   - Demeter: la clase no accede a estructuras internas de otras clases.
  */
 class Video {
 protected:
