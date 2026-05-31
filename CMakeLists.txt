@@ -12,4 +12,8 @@ add_executable(ProyectoII main.cpp
         VideoMPG.cpp
         VideoMPG.h
         Adaptor/AdapterMPG.cpp
-        Adaptor/AdapterMPG.h)
+        Adaptor/AdapterMPG.h
+        Canal.cpp
+        Canal.h
+        Usuario.cpp
+        Usuario.h)
