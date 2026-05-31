@@ -4,7 +4,7 @@ project(ProyectoII)
 set(CMAKE_CXX_STANDARD 20)
 
 add_executable(ProyectoII main.cpp
-        Librerias.h
+
         Excepciones/TuTuboExcepcion.h
         Excepciones/ArchivoExcepcion.h
         Excepciones/ReproduccionExcepcion.h
