@@ -2,7 +2,7 @@
 #ifndef PROYECTOII_CANAL_H
 #define PROYECTOII_CANAL_H
 #include "Librerias.h"
-#include "Lista/ListaEnlazada.h"
+#include "ListaEnlazada.h"
 #include "Video.h"
 #include "Observer/IObservable.h"
 #include "Observer/IObserver.h"

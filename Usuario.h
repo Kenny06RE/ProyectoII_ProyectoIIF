@@ -6,7 +6,7 @@
 #include "Librerias.h"
 #include "Canal.h"
 #include "Observer/IObserver.h"
-#include "Lista/ListaEnlazada.h"
+#include "ListaEnlazada.h"
 
 /**
  Representa un usuario

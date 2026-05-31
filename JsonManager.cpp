@@ -2,7 +2,7 @@
 #include "Usuario.h"
 #include "VideoMP4.h"
 #include "Adaptor/AdapterMPG.h"
-#include "excepciones/ArchivoException.h"
+#include "Excepciones/ArchivoExcepcion.h"
  
 // ── Singleton: inicialización del puntero estático ────────────────────────────
 JsonManager* JsonManager::instancia = nullptr;
@@ -23,7 +23,7 @@ void JsonManager::guardar(const ListaEnlazada<unique_ptr<Usuario>>& usuarios) {
     // Crear directorio data/ si no existe (portátil con fstream)
     ofstream salida(archivo);
     if (!salida.is_open())
-        throw ArchivoException(archivo);
+        throw ArchivoExcepcion(archivo);
  
     Json::Value raiz;
     Json::Value arrUsuarios(Json::arrayValue);
@@ -82,7 +82,7 @@ void JsonManager::guardar(const ListaEnlazada<unique_ptr<Usuario>>& usuarios) {
 void JsonManager::cargar(ListaEnlazada<unique_ptr<Usuario>>& usuarios) {
     ifstream entrada(archivo);
     if (!entrada.is_open())
-        throw ArchivoException(archivo);
+        throw ArchivoExcepcion(archivo);
  
     Json::Value obj;
     Json::Reader reader;
@@ -132,7 +132,7 @@ void JsonManager::cargar(ListaEnlazada<unique_ptr<Usuario>>& usuarios) {
             } else {
                 // MPG: crear VideoMPG y envolverlo en el Adaptador
                 auto mpg = make_unique<VideoMPG>(nombre, desc, fecha);
-                video    = make_unique<AdaptadorMPG>(move(mpg));
+                video    = make_unique<AdapterMPG>(move(mpg));
             }
             // Publicar SIN notificar (ya se notificó originalmente)
             usuario->getCanal().cargarVideo(move(video));

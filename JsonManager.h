@@ -5,7 +5,7 @@
 
 #include "Librerias.h"
 #include "dist/json/json.h"
-#include "Lista/ListaEnlazada.h"
+#include "ListaEnlazada.h"
 
 class Usuario; // forward declaration para evitar inclusion circular
 

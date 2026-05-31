@@ -1,6 +1,3 @@
-//
-// Created by favio on 30/5/2026.
-//
 
 #ifndef PROYECTOII_NODO_H
 #define PROYECTOII_NODO_H

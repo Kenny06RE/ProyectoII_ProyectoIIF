@@ -5,7 +5,7 @@
 #ifndef PROYECTOII_ICOLECCION_H
 #define PROYECTOII_ICOLECCION_H
 #include "../Librerias.h"
-
+#include "IIterador.h"
 template<typename T>
 class IColeccion {
 public:

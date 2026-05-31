@@ -1,12 +1,10 @@
-cmake_minimum_required(VERSION 4.1)
+cmake_minimum_required(VERSION 3.20)
 project(ProyectoII)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(ProyectoII main.cpp
-
-
-)
+add_executable(ProyectoII
+        main.cpp
         Librerias.h
         Video.h
         Videomp4.cpp
@@ -19,8 +17,8 @@ add_executable(ProyectoII main.cpp
         Canal.h
         Usuario.cpp
         Usuario.h
-dist/jsoncpp.cpp
-dist/json/json.h
+        dist/jsoncpp.cpp
+        dist/json/json.h
         JsonManager.cpp
         JsonManager.h
         Excepciones/TuTuboExcepcion.h
@@ -34,4 +32,5 @@ dist/json/json.h
         ListaEnlazada.h
         Nodo.h
         Iterador/IIterador.h
-        Iterador/IColeccion.h)
+        Iterador/IColeccion.h
+)
