@@ -4,6 +4,7 @@
 
 #ifndef PROYECTOII_NODO_H
 #define PROYECTOII_NODO_H
+#include "Librerias.h"
 
 template<typename T>
 class Nodo {

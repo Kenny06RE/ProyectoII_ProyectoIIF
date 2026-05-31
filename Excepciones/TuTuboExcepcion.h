@@ -4,6 +4,7 @@
 
 #ifndef PROYECTOII_TUTUBOEXCEPCION_H
 #define PROYECTOII_TUTUBOEXCEPCION_H
+#include "../Librerias.h"
 
 // Excepción base del sistema. Todas las demás heredan de esta.
 

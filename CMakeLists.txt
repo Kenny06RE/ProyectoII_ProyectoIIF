@@ -15,4 +15,6 @@ add_executable(ProyectoII main.cpp
         Observer/IObservable.h
         ListaEnlazada.h
         Nodo.h
+        Iterador/IIterador.h
+        Iterador/IColeccion.h
 )
