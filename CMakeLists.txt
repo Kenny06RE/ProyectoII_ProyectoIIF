@@ -5,7 +5,6 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_executable(ProyectoII main.cpp
         Librerias.h
-        Librerias.h
         Video.h
         Videomp4.cpp
         Videomp4.h
@@ -16,4 +15,8 @@ add_executable(ProyectoII main.cpp
         Canal.cpp
         Canal.h
         Usuario.cpp
-        Usuario.h)
+        Usuario.h
+dist/jsoncpp.cpp
+dist/json/json.h
+        JsonManager.cpp
+        JsonManager.h)
