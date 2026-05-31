@@ -7,3 +7,16 @@ add_executable(ProyectoII main.cpp
 
 
 )
+        Librerias.h
+        Librerias.h
+        Video.h
+        Videomp4.cpp
+        Videomp4.h
+        VideoMPG.cpp
+        VideoMPG.h
+        Adaptor/AdapterMPG.cpp
+        Adaptor/AdapterMPG.h
+        Canal.cpp
+        Canal.h
+        Usuario.cpp
+        Usuario.h)
