@@ -4,6 +4,20 @@ project(ProyectoII)
 set(CMAKE_CXX_STANDARD 20)
 
 add_executable(ProyectoII main.cpp
+
+        Excepciones/TuTuboExcepcion.h
+        Excepciones/ArchivoExcepcion.h
+        Excepciones/ReproduccionExcepcion.h
+        Excepciones/SuscripcionException.h
+        Excepciones/UsuarioYaExisteExcepcion.h
+        Excepciones/LoginExcepcion.h
+        Observer/IObserver.h
+        Observer/IObservable.h
+        ListaEnlazada.h
+        Nodo.h
+        Iterador/IIterador.h
+        Iterador/IColeccion.h
+)
         Librerias.h
         Librerias.h
         Video.h
