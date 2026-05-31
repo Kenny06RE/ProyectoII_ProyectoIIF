@@ -19,4 +19,16 @@ add_executable(ProyectoII main.cpp
 dist/jsoncpp.cpp
 dist/json/json.h
         JsonManager.cpp
-        JsonManager.h)
+        JsonManager.h
+        Excepciones/TuTuboExcepcion.h
+        Excepciones/ArchivoExcepcion.h
+        Excepciones/ReproduccionExcepcion.h
+        Excepciones/SuscripcionException.h
+        Excepciones/UsuarioYaExisteExcepcion.h
+        Excepciones/LoginExcepcion.h
+        Observer/IObserver.h
+        Observer/IObservable.h
+        ListaEnlazada.h
+        Nodo.h
+        Iterador/IIterador.h
+        Iterador/IColeccion.h)
