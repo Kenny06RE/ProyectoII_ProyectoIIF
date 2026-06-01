@@ -35,4 +35,5 @@ add_executable(ProyectoII
         Iterador/IColeccion.h
         SistemaTuTubo.cpp
         SistemaTuTubo.h
+        Iterador/IteradorLista.h
 )
