@@ -6,23 +6,14 @@
 #define PROYECTOII_LISTAENLAZADA_H
 #include "Librerias.h"
 #include "Nodo.h"
-#include "Iterador/IIterador.h"
 #include "Iterador/IColeccion.h"
+#include "Iterador/IteradorLista.h"
 
-
-// ── 1. Declaración hacia adelante de la clase externa del Iterador Concreto ──
-template<typename T>
-class IteradorLista;
-
-// ── 2. Clase ListaEnlazada heredando de IColeccion ───────────────────────────
 template<typename T>
 class ListaEnlazada : public IColeccion<T> {
 private:
-    unique_ptr<Nodo<T>> raiz; // Usa tu clase externa Nodo<T>
+    unique_ptr<Nodo<T>> raiz;
     int tamano;
-
-    // Hacemos que el Iterador Concreto sea amigo para que pueda leer la raíz
-    friend class IteradorLista<T>;
 
 public:
     ListaEnlazada() : raiz(nullptr), tamano(0) {}
@@ -30,12 +21,12 @@ public:
     ListaEnlazada(const ListaEnlazada&) = delete;
     ListaEnlazada& operator=(const ListaEnlazada&) = delete;
 
-    // Implementación del método de la interfaz IColeccion
+
     unique_ptr<IIterador<T>> crearIterador() const override {
         return make_unique<IteradorLista<T>>(raiz.get());
     }
 
-    // ── Operaciones básicas de la lista ───────────────────────────────────────
+
     void agregar(T elemento) {
         auto nuevoNodo = make_unique<Nodo<T>>(move(elemento));
         if (!raiz) {
@@ -126,36 +117,9 @@ public:
 
     int  size()  const { return tamano; }
     bool vacia() const { return tamano == 0; }
-    void limpiar()     { raiz.reset(); tamano = 0; }
+    void limpiar() { raiz.reset(); tamano = 0; }
 };
 
-// ── 3. Implementación del Iterador Concreto Externo heredando de IIterador ──
-template<typename T>
-class IteradorLista : public IIterador<T> {
-private:
-    Nodo<T>* inicio;  // Guarda la posición inicial para reiniciar
-    Nodo<T>* actual;  // Posición actual del recorrido
-
-public:
-    explicit IteradorLista(Nodo<T>* nodoInicio) : inicio(nodoInicio), actual(nodoInicio) {}
-
-    bool haySiguiente() const override {
-        return actual != nullptr;
-    }
-
-    const T& siguiente() override {
-        if (!actual) {
-            throw out_of_range("No hay mas elementos en el iterador");
-        }
-        const T& dato = actual->dato;
-        actual = actual->siguiente.get(); // Avanza al siguiente nodo
-        return dato;
-    }
-
-    void reiniciar() override {
-        actual = inicio;
-    }
-};
 
 
 
