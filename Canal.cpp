@@ -13,7 +13,6 @@ void Canal::publicarVideo(unique_ptr<Video> video) {
  
 
 Video* Canal::buscarPorNombre(const string& query) const {
-    // Convertir query a minúsculas
     string qLower = query;
     transform(qLower.begin(), qLower.end(), qLower.begin(), ::tolower);
  
@@ -29,7 +28,7 @@ Video* Canal::buscarPorNombre(const string& query) const {
  
 
 void Canal::agregarObserver(IObserver* obs) {
-    // Verificar que no esté ya registrado
+    // Verificar que no este ya registrado
     for (int i = 0; i < suscriptores.size(); ++i) {
         if (suscriptores.obtener(i)->getUsername() == obs->getUsername())
             return;

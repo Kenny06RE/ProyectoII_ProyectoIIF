@@ -4,7 +4,7 @@
 #include "Adaptor/AdapterMPG.h"
 #include "Excepciones/ArchivoExcepcion.h"
  
-// ── Singleton: inicialización del puntero estático ────────────────────────────
+//Singleton: inicialización del puntero estático
 JsonManager* JsonManager::instancia = nullptr;
  
 JsonManager& JsonManager::getInstance(const string& arch) {
@@ -18,9 +18,9 @@ bool JsonManager::existeArchivo() const {
     return f.good();
 }
  
-// ── GUARDAR ───────────────────────────────────────────────────────────────────
+//GUARDAR
 void JsonManager::guardar(const ListaEnlazada<unique_ptr<Usuario>>& usuarios) {
-    // Crear directorio data/ si no existe (portátil con fstream)
+
     ofstream salida(archivo);
     if (!salida.is_open())
         throw ArchivoExcepcion(archivo);
@@ -35,19 +35,19 @@ void JsonManager::guardar(const ListaEnlazada<unique_ptr<Usuario>>& usuarios) {
         objU["username"] = u.getUsername();
         objU["password"] = u.getPassword();
  
-        // ── Canales suscritos ──────────────────────────────────────────────
+        //Canales suscritos
         Json::Value arrSus(Json::arrayValue);
         for (int j = 0; j < u.getCanalesSuscritos().size(); ++j)
             arrSus.append(u.getCanalesSuscritos().obtener(j));
         objU["canalesSuscritos"] = arrSus;
  
-        // ── Notificaciones ────────────────────────────────────────────────
+        //Notificaciones
         Json::Value arrNot(Json::arrayValue);
         for (int j = 0; j < u.getNotificaciones().size(); ++j)
             arrNot.append(u.getNotificaciones().obtener(j));
         objU["notificaciones"] = arrNot;
  
-        // ── Canal y sus videos ────────────────────────────────────────────
+        //Canal y sus videos
         Json::Value objCanal;
         objCanal["nombre"] = u.getCanal().getNombre();
  
@@ -56,21 +56,20 @@ void JsonManager::guardar(const ListaEnlazada<unique_ptr<Usuario>>& usuarios) {
         for (int j = 0; j < vids.size(); ++j) {
             const Video& v = *vids.obtener(j);
             Json::Value objV;
-            objV["nombre"]      = v.getNombre();
-            objV["descripcion"] = v.getDescripcion();
-            objV["tipo"]        = v.getTipo();
-            objV["fecha"]       = v.getFechaPublicacion();
+            objV["nombre"]= v.getNombre();
+            objV["descripcion"]= v.getDescripcion();
+            objV["tipo"]= v.getTipo();
+            objV["fecha"]= v.getFechaPublicacion();
             arrVideos.append(objV);
         }
         objCanal["videos"] = arrVideos;
-        objU["canal"]      = objCanal;
+        objU["canal"]= objCanal;
  
         arrUsuarios.append(objU);
     }
  
     raiz["usuarios"] = arrUsuarios;
- 
-    // Escribir con formato legible
+
     Json::StreamWriterBuilder builder;
     builder["indentation"] = "  ";
     unique_ptr<Json::StreamWriter> writer(builder.newStreamWriter());
@@ -78,7 +77,7 @@ void JsonManager::guardar(const ListaEnlazada<unique_ptr<Usuario>>& usuarios) {
     salida.close();
 }
  
-// ── CARGAR ────────────────────────────────────────────────────────────────────
+//CARGAR
 void JsonManager::cargar(ListaEnlazada<unique_ptr<Usuario>>& usuarios) {
     ifstream entrada(archivo);
     if (!entrada.is_open())
@@ -88,7 +87,7 @@ void JsonManager::cargar(ListaEnlazada<unique_ptr<Usuario>>& usuarios) {
     Json::Reader reader;
     if (!reader.parse(entrada, obj)) {
         entrada.close();
-        return; // JSON mal formado: se inicia en blanco
+        return;
     }
     entrada.close();
  
@@ -103,38 +102,36 @@ void JsonManager::cargar(ListaEnlazada<unique_ptr<Usuario>>& usuarios) {
             ju["password"].asString()
         );
  
-        // ── Canales suscritos ──────────────────────────────────────────────
+        //Canales suscritos
         const Json::Value& sus = ju["canalesSuscritos"];
         for (int j = 0; j < (int)sus.size(); ++j)
             usuario->agregarSuscripcion(sus[j].asString());
  
-        // ── Notificaciones ────────────────────────────────────────────────
-        // Se restauran con restaurarNotificacion() para no volver a generar
-        // el emoji/texto: los mensajes ya están formateados desde que se guardaron.
+        //Notificaciones
         const Json::Value& nots = ju["notificaciones"];
         for (int j = 0; j < (int)nots.size(); ++j)
             usuario->restaurarNotificacion(nots[j].asString());
  
-        // ── Videos del canal ──────────────────────────────────────────────
-        const Json::Value& canal  = ju["canal"];
-        const Json::Value& videos = canal["videos"];
+        //Videos del canal
+        const Json::Value& canal= ju["canal"];
+        const Json::Value& videos=canal["videos"];
  
         for (int j = 0; j < (int)videos.size(); ++j) {
             const Json::Value& jv = videos[j];
-            string nombre  = jv["nombre"].asString();
-            string desc    = jv["descripcion"].asString();
-            string tipo    = jv["tipo"].asString();
-            string fecha   = jv["fecha"].asString();
+            string nombre= jv["nombre"].asString();
+            string desc= jv["descripcion"].asString();
+            string tipo= jv["tipo"].asString();
+            string fecha= jv["fecha"].asString();
  
             unique_ptr<Video> video;
             if (tipo == "MP4") {
                 video = make_unique<VideoMP4>(nombre, desc, fecha);
             } else {
-                // MPG: crear VideoMPG y envolverlo en el Adaptador
+
                 auto mpg = make_unique<VideoMPG>(nombre, desc, fecha);
-                video    = make_unique<AdapterMPG>(move(mpg));
+                video= make_unique<AdapterMPG>(move(mpg));
             }
-            // Publicar SIN notificar (ya se notificó originalmente)
+
             usuario->getCanal().cargarVideo(move(video));
         }
  

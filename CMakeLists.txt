@@ -33,4 +33,6 @@ add_executable(ProyectoII
         Nodo.h
         Iterador/IIterador.h
         Iterador/IColeccion.h
+        SistemaTuTubo.cpp
+        SistemaTuTubo.h
 )

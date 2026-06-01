@@ -1,6 +1,3 @@
-//
-// Created by favio on 30/5/2026.
-//
 
 #ifndef PROYECTOII_ICOLECCION_H
 #define PROYECTOII_ICOLECCION_H

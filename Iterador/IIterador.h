@@ -1,6 +1,4 @@
-//
-// Created by favio on 30/5/2026.
-//
+
 
 #ifndef PROYECTOII_IITERADOR_H
 #define PROYECTOII_IITERADOR_H
