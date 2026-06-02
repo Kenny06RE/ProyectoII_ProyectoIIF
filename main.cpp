@@ -5,7 +5,7 @@
 #include <limits>
 using namespace std;
 
-// ── Utilidades de consola ─────────────────────────────────────────────────────
+
 void limpiarBuffer() {
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 }
@@ -34,7 +34,6 @@ void pausar() {
 }
 
 void limpiarPantalla() {
-    // Funciona en Windows y Unix
     #ifdef _WIN32
         system("cls");
     #else
@@ -42,7 +41,7 @@ void limpiarPantalla() {
     #endif
 }
 
-// ── Cabecera ──────────────────────────────────────────────────────────────────
+
 void mostrarCabecera(const string& titulo, const string& usuarioActivo = "") {
     cout << "\n";
     cout << "****************************************************\n";
@@ -54,7 +53,7 @@ void mostrarCabecera(const string& titulo, const string& usuarioActivo = "") {
         cout << "****************************************************\n";
 }
 
-// ── Menú Usuarios ─────────────────────────────────────────────────────────────
+//Menu Usuarios
 void menuUsuarios(SistemaTuTubo& sistema) {
     bool salir = false;
     while (!salir) {
@@ -78,40 +77,40 @@ void menuUsuarios(SistemaTuTubo& sistema) {
             switch (op) {
             case 1: {
                 cout << "\n--- Crear Usuario ---\n";
-                string user = leerLinea("  Username : ");
-                string pwd  = leerLinea("  Password : ");
+                string user = leerLinea("  Username: ");
+                string pwd  = leerLinea("  Password: ");
                 cout << sistema.crearUsuario(user, pwd);
                 break;
             }
             case 2: {
                 cout << "\n--- Login ---\n";
-                string user = leerLinea("  Username : ");
-                string pwd  = leerLinea("  Password : ");
+                string user = leerLinea("  Username: ");
+                string pwd  = leerLinea("  Password: ");
                 cout << sistema.login(user, pwd);
                 break;
             }
             case 3: {
                 if (!sistema.hayUsuarioActivo()) {
-                    cout << "\n⚠  Debe hacer login primero.\n";
+                    cout << "\n Debe hacer login primero.\n";
                     break;
                 }
                 cout << "\n--- Subir Video ---\n";
-                string nombre = leerLinea("  Nombre del video  : ");
-                string desc   = leerLinea("  Descripcion       : ");
+                string nombre = leerLinea("  Nombre del video: ");
+                string desc   = leerLinea("  Descripcion: ");
                 cout << "  Formato (1=MP4, 2=MPG): ";
                 int tipo = leerOpcion(1, 2);
                 cout << sistema.subirVideo(nombre, desc, to_string(tipo));
                 break;
             }
             case 4: {
-                if (!sistema.hayUsuarioActivo()) { cout << "\n⚠  Debe hacer login primero.\n"; break; }
+                if (!sistema.hayUsuarioActivo()) { cout << "\n Debe hacer login primero.\n"; break; }
                 cout << sistema.listarCanales();
                 string canal = leerLinea("\n  Nombre del canal a suscribir: ");
                 cout << sistema.suscribirse(canal);
                 break;
             }
             case 5: {
-                if (!sistema.hayUsuarioActivo()) { cout << "\n⚠  Debe hacer login primero.\n"; break; }
+                if (!sistema.hayUsuarioActivo()) { cout << "\n Debe hacer login primero.\n"; break; }
                 string canal = leerLinea("  Nombre del canal a desuscribir: ");
                 cout << sistema.desuscribirse(canal);
                 break;
@@ -130,14 +129,14 @@ void menuUsuarios(SistemaTuTubo& sistema) {
                 break;
             }
         } catch (const TuTuboExcepcion& e) {
-            cout << "\n❌ " << e.what() << "\n";
+            cout << "\n Error: " << e.what() << "\n";
         }
 
         if (!salir) pausar();
     }
 }
 
-// ── Menú Videos ───────────────────────────────────────────────────────────────
+//Menú Videos
 void menuVideos(SistemaTuTubo& sistema) {
     bool salir = false;
     while (!salir) {
@@ -178,16 +177,16 @@ void menuVideos(SistemaTuTubo& sistema) {
                 break;
             }
         } catch (const TuTuboExcepcion& e) {
-            cout << "\n❌ " << e.what() << "\n";
+            cout << "\n Error: " << e.what() << "\n";
         }
 
         if (!salir) pausar();
     }
 }
 
-// ── Menú Principal ────────────────────────────────────────────────────────────
+//Menú Principal
 int main() {
-    SistemaTuTubo sistema;   // auto-carga al construir
+    SistemaTuTubo sistema;
 
     bool salir = false;
     while (!salir) {
@@ -210,15 +209,15 @@ int main() {
             case 3: cout << sistema.guardarDatos();   pausar(); break;
             case 4: cout << sistema.cargarDatos();    pausar(); break;
             case 5:
-                cout << "\n💾 Guardando datos y cerrando...\n";
+                cout << "\n Guardando datos y cerrando...\n";
                 salir = true;
                 break;
             }
         } catch (const TuTuboExcepcion& e) {
-            cout << "\n❌ " << e.what() << "\n";
+            cout << "\n Error: " << e.what() << "\n";
             pausar();
         } catch (const exception& e) {
-            cout << "\n❌ Error inesperado: " << e.what() << "\n";
+            cout << "\n Error inesperado: " << e.what() << "\n";
             pausar();
         }
     }
